@@ -1,11 +1,11 @@
-// AI-assisted: Generated with [Copilot] on [14/10/2026]. Modified by [Jonathan Nartey].
+// AI-assisted: Generated with ChatGPT on 14 October 2026. Modified by Jonathan Nartey.
+
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-/// Root widget of the application
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,78 +13,63 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'INFT 425',
-      debugShowCheckedModeBanner: false,
-
-      // Enable Material 3 and use a blue color scheme
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
       ),
-
-      home: const HomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
-/// Main screen widget
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // App bar displayed at the top of the screen
+      // AppBar with your name
       appBar: AppBar(
         title: const Text('INFT 425 - Jonathan Nartey'),
+        backgroundColor: Colors.purple,
       ),
-
-      // Body of the Scaffold
-      body: Center(
-        // Center widget keeps the Column in the middle of the screen
+      // Body is a centered column
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Hello World text styled in green, bold, and 35pt
-            const Text(
+            // Main greeting text
+            Text(
               'Hello World',
               style: TextStyle(
-                fontSize: 35,
+                fontSize: 36, // changed from 40 to 36
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 135, 76, 175),
+                color: Colors.purple, // changed from blue to purple
               ),
             ),
-
-            const SizedBox(height: 16),
-
-            // Flutter-related code icon
-            const Icon(
+            SizedBox(height: 20),
+            // Flutter icon
+            Icon(
               Icons.code,
-              color: Color.fromARGB(255, 99, 76, 175),
               size: 50,
+              color: Colors.green,
             ),
-
-            const SizedBox(height: 12),
-
-            // School icon displayed in red
-            const Icon(
-              Icons.school,
-              color: Colors.red,
-              size: 45,
-            ),
-
-            const SizedBox(height: 16),
-
-            // Department name displayed as centered italic text
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Department of Computing Sciences and Information Technology',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
-                ),
+            SizedBox(height: 20),
+            // Department name
+            Text(
+              'Department of Computing Sciences and Engineering',
+              style: TextStyle(
+                fontSize: 16,
+                fontStyle: FontStyle.italic,
               ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            // Extra widget I added
+            Icon(
+              Icons.school,
+              size: 40,
+              color: Colors.orange,
             ),
           ],
         ),
