@@ -1,4 +1,4 @@
-// AI-assisted: Generated with ChatGPT on 14 October 2026. Modified by Jonathan Nartey.
+// AI-assisted: Generated with Gemini on October 15, 2026. Modified by Jonathan Narwotey Nartey.
 
 import 'package:flutter/material.dart';
 
@@ -6,70 +6,75 @@ void main() {
   runApp(const MyApp());
 }
 
+// Main application widget using Material 3
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'INFT 425',
+      debugShowCheckedModeBanner: false,
+      title: 'INFT 425 App',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const HomeScreen(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+// Home screen widget displaying the layout components
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar with your name
+      // AppBar titled as required by course instructions
       appBar: AppBar(
-        title: const Text('INFT 425 - Jonathan Nartey'),
-        backgroundColor: const Color.fromARGB(255, 185, 154, 191),
+        title: const Text('INFT 425 - Jonathan Narwotey Nartey'),
+        backgroundColor: Colors.purple.shade100,
       ),
-      // Body is a centered column
-      body: const Center(
+      // Centered column containing text, icons, and custom widgets
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Main greeting text
-            Text(
+            // Hello World text in 36pt bold purple (customized size & color)
+            const Text(
               'Hello World',
               style: TextStyle(
-                fontSize: 36, // changed from 40 to 36
+                fontSize: 36,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 68, 54, 70), // changed from blue to purple
+                color: Colors.purple,
               ),
             ),
-            SizedBox(height: 20),
-            // Flutter icon
-            Icon(
+            const SizedBox(height: 20),
+            // Code icon in green, 50px
+            const Icon(
               Icons.code,
-              size: 50,
               color: Colors.green,
+              size: 50,
             ),
-            SizedBox(height: 20),
-            // Department name
-            Text(
+            const SizedBox(height: 20),
+            // Department text in 16pt italic, centered
+            const Text(
               'Department of Computing Sciences and Engineering',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
                 fontStyle: FontStyle.italic,
               ),
-              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
-            // Extra widget I added
-            Icon(
-              Icons.school,
-              size: 40,
-              color: Color.fromARGB(255, 160, 134, 95),
+            const SizedBox(height: 20),
+            // Extra added widget: A motivational subtitle
+            const Text(
+              'Building Mobile Apps with Flutter!',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
             ),
           ],
         ),
