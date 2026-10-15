@@ -31,7 +31,7 @@ class MyHomePage extends StatelessWidget {
       // AppBar with your name
       appBar: AppBar(
         title: const Text('INFT 425 - Jonathan Nartey'),
-        backgroundColor: Colors.purple,
+        backgroundColor: const Color.fromARGB(255, 185, 154, 191),
       ),
       // Body is a centered column
       body: const Center(
@@ -44,7 +44,7 @@ class MyHomePage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 36, // changed from 40 to 36
                 fontWeight: FontWeight.bold,
-                color: Colors.purple, // changed from blue to purple
+                color: Color.fromARGB(255, 68, 54, 70), // changed from blue to purple
               ),
             ),
             SizedBox(height: 20),
@@ -69,7 +69,7 @@ class MyHomePage extends StatelessWidget {
             Icon(
               Icons.school,
               size: 40,
-              color: Colors.orange,
+              color: Color.fromARGB(255, 160, 134, 95),
             ),
           ],
         ),
