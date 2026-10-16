@@ -1,4 +1,5 @@
-// AI-assisted: Generated with Gemini on October 15, 2026. Modified by Jonathan Narwotey Nartey.
+// AI-assisted: 3-Screen Navigation & Form Validation App for INFT 425 Lab 1
+// Author: Jonathan Narwotey Nartey
 
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,6 @@ void main() {
   runApp(const MyApp());
 }
 
-// Main application widget using Material 3
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'INFT 425 App',
+      title: 'INFT 425 Lab 1 App',
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
@@ -24,57 +24,148 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Home screen widget displaying the layout components
+// Screen 1: Home Screen
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar titled as required by course instructions
       appBar: AppBar(
-        title: const Text('INFT 425 - Jonathan Narwotey Nartey'),
-        backgroundColor: Colors.purple.shade100,
+        title: const Text('INFT 425 - Home Screen'),
+        backgroundColor: Colors.blue.shade100,
       ),
-      // Centered column containing text, icons, and custom widgets
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Hello World text in 36pt bold purple (customized size & color)
             const Text(
-              'Hello World',
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                color: Colors.purple,
-              ),
+              'Welcome to Lab 1 App!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            // Code icon in green, 50px
-            const Icon(
-              Icons.code,
-              color: Colors.green,
-              size: 50,
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to Form Screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const FormScreen()),
+                );
+              },
+              child: const Text('Go to Registration Form'),
             ),
-            const SizedBox(height: 20),
-            // Department text in 16pt italic, centered
-            const Text(
-              'Department of Computing Sciences and Engineering',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                fontStyle: FontStyle.italic,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Screen 2: Form Screen with Validation
+class FormScreen extends StatefulWidget {
+  const FormScreen({super.key});
+
+  @override
+  State<FormScreen> createState() => _FormScreenState();
+}
+
+class _FormScreenState extends State<FormScreen> {
+  // Global key to identify and validate the form
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('INFT 425 - Form Screen'),
+        backgroundColor: Colors.orange.shade100,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Enter Your Full Name',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Full Name',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your name to proceed';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Validate form before navigating
+                  if (_formKey.currentState!.validate()) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SuccessScreen(
+                          submittedName: _nameController.text,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Submit & View Results'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Screen 3: Success Screen (Receives validated data)
+class SuccessScreen extends StatelessWidget {
+  final String submittedName;
+
+  const SuccessScreen({super.key, required this.submittedName});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('INFT 425 - Success Screen'),
+        backgroundColor: Colors.green.shade100,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.check_circle, color: Colors.green, size: 80),
+            const SizedBox(height: 20),
+            Text(
+              'Registration Successful!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green.shade700),
             ),
-            const SizedBox(height: 20),
-            // Extra added widget: A motivational subtitle
-            const Text(
-              'Building Mobile Apps with Flutter!',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
+            const SizedBox(height: 10),
+            Text(
+              'Welcome, $submittedName!',
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                // Pop back all the way to Home Screen
+                Navigator.popUntil(context, (route) => route.isFirst);
+              },
+              child: const Text('Back to Home'),
             ),
           ],
         ),
