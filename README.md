@@ -1,17 +1,30 @@
-# week1_project
+# INFT 425 - Lab 1: Flutter Multi-Screen Navigation & Form Validation App
 
-A new Flutter project.
+## Student Information
+- **Name:** Jonathan Narwotey Nartey
+- **Course Code:** INFT 425
+- **Institution:** Valley View University (VVU)
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## App Overview
+This mobile application is built with Flutter and demonstrates core mobile development principles, including:
+1. **Multi-Screen Navigation:** Seamless routing between multiple screens using Flutter's `Navigator` stack (`push`, `pop`, and `popUntil`).
+2. **Form Validation:** Input validation ensuring required fields are populated before allowing users to proceed.
+3. **Data Passing:** Dynamic passing of state and text data between screens (Home $\rightarrow$ Form $\rightarrow$ Success Screen).
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Screen Architecture
+- **Screen 1 (Home Screen):** Welcomes the user and provides navigation to the registration form.
+- **Screen 2 (Form Screen):** Features a validated text field for user input.
+- **Screen 3 (Success Screen):** Displays a success confirmation message along with the user's submitted name.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## How to Run the App
+1. Ensure Flutter is installed and configured (`flutter doctor`).
+2. Connect an Android emulator or launch Chrome.
+3. Run the following command in your terminal:
+   ```bash
+   flutter run
