@@ -1,4 +1,4 @@
-// AI-assisted: 3-Screen Navigation & Form Validation App for INFT 425 Lab 1
+// AI-assisted: Multi-Screen Navigation App for INFT 425 Lab 1 Prep
 // Author: Jonathan Narwotey Nartey
 
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'INFT 425 Lab 1 App',
+      title: 'INFT 425 Navigation App',
       theme: ThemeData(
         useMaterial3: true,
         primarySwatch: Colors.blue,
@@ -40,19 +40,23 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Welcome to Lab 1 App!',
+              'Welcome to Lab 1 Preparation!',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Navigate to Form Screen
+                // Navigate to Details Screen and pass data
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FormScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => const DetailsScreen(
+                      userName: 'Jonathan Narwotey Nartey',
+                    ),
+                  ),
                 );
               },
-              child: const Text('Go to Registration Form'),
+              child: const Text('Go to Details Screen'),
             ),
           ],
         ),
@@ -61,109 +65,37 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// Screen 2: Form Screen with Validation
-class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+// Screen 2: Details Screen (Receives data from Home)
+class DetailsScreen extends StatelessWidget {
+  final String userName;
 
-  @override
-  State<FormScreen> createState() => _FormScreenState();
-}
-
-class _FormScreenState extends State<FormScreen> {
-  // Global key to identify and validate the form
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  const DetailsScreen({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('INFT 425 - Form Screen'),
-        backgroundColor: Colors.orange.shade100,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Enter Your Full Name',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Full Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name to proceed';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Validate form before navigating
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SuccessScreen(
-                          submittedName: _nameController.text,
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Submit & View Results'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Screen 3: Success Screen (Receives validated data)
-class SuccessScreen extends StatelessWidget {
-  final String submittedName;
-
-  const SuccessScreen({super.key, required this.submittedName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('INFT 425 - Success Screen'),
+        title: const Text('INFT 425 - Details Screen'),
         backgroundColor: Colors.green.shade100,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.check_circle, color: Colors.green, size: 80),
-            const SizedBox(height: 20),
             Text(
-              'Registration Successful!',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.green.shade700),
+              'Hello, $userName!',
+              style: const TextStyle(fontSize: 20, color: Colors.green),
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Welcome, $submittedName!',
-              style: const TextStyle(fontSize: 18),
+            const SizedBox(height: 20),
+            const Text(
+              'Data successfully passed between screens!',
+              style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                // Pop back all the way to Home Screen
-                Navigator.popUntil(context, (route) => route.isFirst);
+                // Pop back to Home Screen
+                Navigator.pop(context);
               },
               child: const Text('Back to Home'),
             ),
