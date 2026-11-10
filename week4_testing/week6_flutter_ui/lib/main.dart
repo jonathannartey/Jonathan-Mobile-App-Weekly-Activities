@@ -21,8 +21,29 @@ class StudentApp extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+// Converted to a StatefulWidget to handle interactive state
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  // Mutable state variable
+  int _connectionCount = 0;
+  bool _isFollowing = false;
+
+  void _toggleFollow() {
+    setState(() {
+      _isFollowing = !_isFollowing;
+      if (_isFollowing) {
+        _connectionCount++;
+      } else {
+        _connectionCount--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +77,28 @@ class ProfileScreen extends StatelessWidget {
               'ID: 224IT01001233',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
+            // Interactive Follow Button & Counter
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: _toggleFollow,
+                  icon: Icon(_isFollowing ? Icons.check : Icons.person_add),
+                  label: Text(_isFollowing ? 'Connected' : 'Connect'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _isFollowing ? Colors.green : Colors.blueAccent,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Text(
+                  'Connections: $_connectionCount',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
             const Divider(),
             // Details Card
             Card(
@@ -76,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                     ListTile(
                       leading: Icon(Icons.school, color: Colors.green),
                       title: Text('Current Module'),
-                      subtitle: Text('Week 6: Flutter UI & Layouts'),
+                      subtitle: Text('Week 6: Flutter UI & State Management'),
                     ),
                     ListTile(
                       leading: Icon(Icons.star, color: Colors.amber),
