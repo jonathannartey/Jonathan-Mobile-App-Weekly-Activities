@@ -192,7 +192,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: ListTile(
-        leading: CircleAvatar(child: Text(item.title[0].toUpperCase())),
+        leading: Hero(
+          tag: 'avatar_${item.id}',
+          child: CircleAvatar(child: Text(item.title[0].toUpperCase())),
+        ),
         title: Text(item.title,
             style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text('${item.subtitle} · ${item.category}'),

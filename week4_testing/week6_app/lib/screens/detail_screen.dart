@@ -31,6 +31,17 @@ class DetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Hero(
+                  tag: 'avatar_${item.id}',
+                  child: CircleAvatar(
+                    radius: 32,
+                    child: Text(
+                      item.title[0].toUpperCase(),
+                      style: const TextStyle(fontSize: 28),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
                 Chip(label: Text(item.category)),
                 const SizedBox(height: 12),
                 Text(item.title,
