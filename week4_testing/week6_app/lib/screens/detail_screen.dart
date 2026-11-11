@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/item.dart';
+import '../theme/typography_guide.dart';
 
 class DetailScreen extends StatelessWidget {
   final Item item;
@@ -44,14 +45,11 @@ class DetailScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 Chip(label: Text(item.category)),
                 const SizedBox(height: 12),
-                Text(item.title,
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold)),
+                AppText.headline(context, item.title),
                 const SizedBox(height: 4),
-                Text(item.subtitle,
-                    style: const TextStyle(color: Colors.grey)),
+                AppText.subtitle(context, item.subtitle),
                 const SizedBox(height: 16),
-                Text(item.description, style: const TextStyle(fontSize: 16)),
+                AppText.body(context, item.description),
               ],
             ),
           ),

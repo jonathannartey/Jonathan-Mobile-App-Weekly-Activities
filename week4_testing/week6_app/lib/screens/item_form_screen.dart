@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/item.dart';
 
 class ItemFormScreen extends StatefulWidget {
@@ -21,10 +22,12 @@ class _ItemFormScreenState extends State<ItemFormScreen> {
   void initState() {
     super.initState();
     _titleCtrl = TextEditingController(text: widget.existing?.title ?? '');
-    _subtitleCtrl =
-        TextEditingController(text: widget.existing?.subtitle ?? '');
-    _descriptionCtrl =
-        TextEditingController(text: widget.existing?.description ?? '');
+    _subtitleCtrl = TextEditingController(
+      text: widget.existing?.subtitle ?? '',
+    );
+    _descriptionCtrl = TextEditingController(
+      text: widget.existing?.description ?? '',
+    );
     _category = widget.existing?.category ?? _categories.first;
   }
 
@@ -38,21 +41,22 @@ class _ItemFormScreenState extends State<ItemFormScreen> {
 
   void _save() {
     if (!_formKey.currentState!.validate()) return;
-    final result = (widget.existing ??
-            Item(
-              id: DateTime.now().millisecondsSinceEpoch.toString(),
-              title: '',
-              subtitle: '',
-              description: '',
-              category: _categories.first,
-              createdAt: DateTime.now(),
-            ))
-        .copyWith(
-      title: _titleCtrl.text,
-      subtitle: _subtitleCtrl.text,
-      description: _descriptionCtrl.text,
-      category: _category,
-    );
+    final result =
+        (widget.existing ??
+                Item(
+                  id: DateTime.now().millisecondsSinceEpoch.toString(),
+                  title: '',
+                  subtitle: '',
+                  description: '',
+                  category: _categories.first,
+                  createdAt: DateTime.now(),
+                ))
+            .copyWith(
+              title: _titleCtrl.text,
+              subtitle: _subtitleCtrl.text,
+              description: _descriptionCtrl.text,
+              category: _category,
+            );
     Navigator.pop(context, result);
   }
 
@@ -86,7 +90,8 @@ class _ItemFormScreenState extends State<ItemFormScreen> {
                 labelText: 'Subtitle',
                 border: OutlineInputBorder(),
               ),
-              validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+              validator: (v) =>
+                  (v == null || v.trim().isEmpty) ? 'Required' : null,
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
